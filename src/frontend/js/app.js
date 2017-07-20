@@ -1,6 +1,7 @@
 import React from 'react';
 import CandleStickStockScaleChart from './CandleStickStockScaleChart.js';
 import NewsFeed from './NewsFeed.js';
+import Profile from './Profile.js';
 
 class App extends React.Component{
 
@@ -25,7 +26,12 @@ class App extends React.Component{
 
             <div>
                 <div className="chart-parent">{renderedStockDoms}</div>
-                <div className="news-feed-parent"><NewsFeed symbols={stockSymbols}/></div>
+                <div className="side-container">
+
+                    <Profile/>
+                    <NewsFeed symbols={stockSymbols}/>
+
+                </div>
             </div>
 
         );

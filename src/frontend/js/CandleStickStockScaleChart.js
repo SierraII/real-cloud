@@ -97,7 +97,7 @@ class CandleStickStockScaleChart extends React.Component{
 
 		let { width, ratio } = this.props;
 
-        let margin = {left: 20, right: 80, top:130, bottom: 250};
+        let margin = {left: 20, right: 0, top:130, bottom: 250};
         let height = 750;
 
         let gridHeight = height - margin.top - margin.bottom;
@@ -111,31 +111,41 @@ class CandleStickStockScaleChart extends React.Component{
 
             return(
 
-                <ChartCanvas ratio={ratio} width={width} height={400}
-    					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type="svg"
-    					seriesName={this.props.symbol}
-    					data={this.state.data}
-    					xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-    					xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 20)]}>
+                <div>
 
-    				<Chart id={1} yExtents={d => [d.high, d.low]}>
+                    <ChartCanvas ratio={ratio} width={width} height={400}
+                            margin={{ left: 50, right: 0, top: 10, bottom: 30 }} type="svg"
+                            seriesName={this.props.symbol}
+                            data={this.state.data}
+                            xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
+                            xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 20)]}>
 
-                        <YAxis axisAt="left" orient="left" ticks={5} {...yGrid} inverted={true} tickStroke="#FFFFFF" />
-                        <XAxis axisAt="bottom" orient="bottom" ticks={5} {...xGrid} inverted={true} tickStroke="#FFFFFF"/>
+                        <Chart id={1} yExtents={d => [d.high, d.low]}>
 
-        				<CandlestickSeries wickStroke={d => d.close > d.open ? "#505667" : "#505667"}
-							fill={d => d.close > d.open ? "#26ff00" : "#ff1500"}/>
+                            <YAxis axisAt="left" orient="left" ticks={5} {...yGrid} inverted={true} tickStroke="#FFFFFF" />
+                            <XAxis axisAt="bottom" orient="bottom" ticks={5} {...xGrid} inverted={true} tickStroke="#FFFFFF"/>
 
-                        <OHLCTooltip forChart={1} origin={[20, 10]}/>
+                            <CandlestickSeries wickStroke={d => d.close > d.open ? "#505667" : "#505667"}
+                                fill={d => d.close > d.open ? "#26ff00" : "#ff1500"}/>
 
-    				</Chart>
+                            <OHLCTooltip forChart={1} origin={[20, 10]}/>
 
-                    <Label x={(width - margin.left - margin.right) / 2} y={(height - margin.top - margin.bottom) / 2}
-                    fontSize={40} text={this.props.symbol} fill="#FFFFFF" opacity={0.2}/>
+                        </Chart>
 
-                    <CrossHairCursor stroke="#FFFFFF"/>
+                        <Label x={(width - margin.left - margin.right) / 2} y={(height - margin.top - margin.bottom) / 2}
+                        fontSize={40} text={this.props.symbol} fill="#FFFFFF" opacity={0.2}/>
 
-    			</ChartCanvas>
+                        <CrossHairCursor stroke="#FFFFFF"/>
+
+                    </ChartCanvas>
+
+                    <div className="controls">
+                        <a className="btn">Daily</a>
+                        <a className="btn">Year</a>
+                        <a className="btn">Tracker</a>
+                    </div>
+
+                </div>
 
             );
 

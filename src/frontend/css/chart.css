@@ -3,17 +3,75 @@ body{
     margin:0;
 }
 
+.profile-container{
+    margin: 2px;
+    padding:15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255 ,0.2);
+}
+
+.btn{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 2px;
+    padding: 5px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    transition:all .3s;
+}
+
 .article-container{
     padding:15px;
     border: 1px solid rgba(255, 255, 255 ,0.2);
     margin: 3px;
+    cursor: pointer;
+}
+
+.news-container a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.article-container:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    transition:all .3s;
+}
+
+#chart-container{
+    clear:both;
+    margin:0 0 55px 0;
+}
+
+.profile-img-circle{
+    border-radius: 50%;
+    width:75px;
+}
+
+.profile-name{
+    display:inline-block;
+    font-size:12px;
+}
+.controls{
+    float:right;
+}
+
+.news-container{
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.heading{
+    padding:8px 0;
 }
 
 .stock-highlight{
     color:yellow;
 }
 
-.news-feed-parent{
+.side-container{
     display:inline-block;
     position:fixed;
     color:white;
@@ -24,7 +82,7 @@ body{
     overflow-y:scroll;
     display:inline-block;
     width:75%;
-    margin:25px 0 0 0;
+    padding: 15px 15px 0 0;
 }
 
 .react-stockcharts-tooltip{

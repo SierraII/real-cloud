@@ -64,32 +64,32 @@ class NewsFeed extends React.Component{
 
 	render(){
 
-        if (this.state.data){
+        let dom = [];
 
-            return(
+        for(var i = 0; i < 100; i++){
 
-                <div>
+            dom.push(
+
+                <a href="http://www.google.co.za" target="_blank">
 
                     <div className="article-container">
                         <div className="heading"><span className="stock-highlight">TSLA</span> - Model 3 Can Propel Tesla Inc (TSLA) Stock to $400 by 2018</div>
                         <div className="date">Tue, 18 Jul 2017 13:59:18 GMT</div>
                     </div>
-                    <div className="article-container">
-                        <div className="heading"><span className="stock-highlight">TSLA</span> - Tesla Investors Swallow The Blue Pill</div>
-                        <div className="date">Tue, 18 Jul 2017 13:59:18 GMT</div>
-                    </div>
-                    <div className="article-container">
-                        <div className="heading"><span className="stock-highlight">TSLA</span> - Upstart Tesla rival Lucid Motors is shopping itself around for a sale, report says</div>
-                        <div className="date">Tue, 18 Jul 2017 13:59:18 GMT</div>
-                    </div>
-                    <div className="article-container">
-                        <div className="heading"><span className="stock-highlight">TSLA</span> - some cool text here</div>
-                        <div className="date">Tue, 18 Jul 2017 13:59:18 GMT</div>
-                    </div>
-                    <div className="article-container">
-                        <div className="heading"><span className="stock-highlight">TSLA</span> - some cool text here</div>
-                        <div className="date">Tue, 18 Jul 2017 13:59:18 GMT</div>
-                    </div>
+
+                </a>
+
+            );
+
+        }
+
+        if (this.state.data){
+
+            return(
+
+                <div className="news-container">
+
+                    {dom}
 
                 </div>
 
