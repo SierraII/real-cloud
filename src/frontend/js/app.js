@@ -17,50 +17,42 @@ class App extends React.Component{
 
     componentDidMount(){
 
-        // var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
-        //
-        // d3["tsv"]("//rrag.github.io/react-stockcharts/data/MSFT.tsv", (err, data) => {
-        //
-        // 	data.forEach((d, i) => {
-        // 		d.date = new Date(d3.timeParse("%Y-%m-%d")(d.date).getTime());
-        // 		d.open = +d.open;
-        // 		d.high = +d.high;
-        // 		d.low = +d.low;
-        // 		d.close = +d.close;
-        // 		d.volume = +d.volume;
-        //         // console.log(d);
-        // 	});
-        //
-        // });
+        var data = [];
 
-        axios.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=BEDQE0RSQK7E37S6").then(result => {
-        //    console.log(result.data);
-        });
+        axios.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=MSFT&interval=1min&apikey=BEDQE0RSQK7E37S6").then(result => {
 
-        var data = [
-            {
-                "date": new Date(2012, 0, 1),
-                "open": 57.08436360087473,
-                "high": 57.451879819431255,
-                "low": 57.451879819431255,
-                "close": 57.143959
-            },
-            {
-                "date": new Date(2012, 6, 1),
-                "open": 57.08436360087473,
-                "high": 57.451879819431255,
-                "low": 57.451879819431255,
-                "close": 57.143959
+            var monthlySeries = result.data["Monthly Time Series"];
+
+            for(var key in monthlySeries){
+
+                if(monthlySeries.hasOwnProperty(key)){
+
+                    var value = monthlySeries[key];
+                    var month = {};
+
+                    month["date"] = new Date(key);
+
+                    month["open"] = parseFloat(value["1. open"]);
+                    month["high"] = parseFloat(value["2. high"]);
+                    month["low"] = parseFloat(value["3. low"]);
+                    month["close"] = parseFloat(value["4. close"]);
+                    month["volume"] = parseFloat(value["5. volume"]);
+
+                    console.log(month);
+
+                    data.unshift(month);
+
+                }
+
             }
-        ];
 
-        this.setState({data: data});
+            this.setState({data: data});
+
+        });
 
     }
 
     render(){
-
-
 
         var type = "svg";
 
@@ -68,7 +60,7 @@ class App extends React.Component{
 
             return(
                 <div id="chart">
-                    <CandleStickStockScaleChart data={this.state.data} type={type} />
+                    <CandleStickStockScaleChart data={this.state.data} type={type}/>
                 </div>
             );
 
@@ -77,8 +69,6 @@ class App extends React.Component{
         else{
             return(<div><h1>loading...</h1></div>);
         }
-
-
 
     }
 
