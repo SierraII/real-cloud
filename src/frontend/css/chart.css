@@ -60,7 +60,8 @@ body{
 
 .news-container{
     overflow-y: scroll;
-    height: 100vh;
+    height: calc(99vh - 85px);
+    font-size:12px;
 }
 
 .heading{
@@ -78,7 +79,7 @@ body{
 }
 
 .chart-parent{
-    height:99vh;
+    height:calc(99vh - 15px);
     overflow-y:scroll;
     display:inline-block;
     width:75%;
