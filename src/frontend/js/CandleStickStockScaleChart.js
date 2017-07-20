@@ -118,7 +118,7 @@ class CandleStickStockScaleChart extends React.Component{
                             seriesName={this.props.symbol}
                             data={this.state.data}
                             xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-                            xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 20)]}>
+                            xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 21)]}>
 
                         <Chart id={1} yExtents={d => [d.high, d.low]}>
 
@@ -152,7 +152,7 @@ class CandleStickStockScaleChart extends React.Component{
         }
 
         else{
-            return(<div><h1>loading...</h1></div>);
+            return(<div className="loading"><div className="loader"></div></div>);
         }
 
 	}

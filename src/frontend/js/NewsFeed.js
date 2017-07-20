@@ -20,6 +20,7 @@ class NewsFeed extends React.Component{
         // TODO
         // create a proxy for getting google news xml feeds
         // cant be loaded from ajax
+        // simulated load delay
 
         let data = [];
 
@@ -98,7 +99,7 @@ class NewsFeed extends React.Component{
         }
 
         else{
-            return(<div><h1>loading...</h1></div>);
+            return(<div className="loading-news"><div className="loader"></div></div>);
         }
 
 	}
