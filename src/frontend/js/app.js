@@ -10,8 +10,6 @@ class App extends React.Component{
 
     render(){
 
-        console.log(this.props);
-
         let stockSymbols = ["GOOGL", "TSLA", "MSFT", "AMZN", "AAPL"];
         let renderedStockDoms = [];
 
@@ -30,13 +28,14 @@ class App extends React.Component{
         return(
 
             <div>
-                <div className="chart-parent">{renderedStockDoms}</div>
-                <div className="side-container">
 
+                <div className="chart-parent">{renderedStockDoms}</div>
+
+                <div className="side-container">
                     <Profile/>
                     <NewsFeed symbols={stockSymbols}/>
-
                 </div>
+
             </div>
 
         );

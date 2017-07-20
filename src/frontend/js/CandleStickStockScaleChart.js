@@ -97,7 +97,7 @@ class CandleStickStockScaleChart extends React.Component{
 
 		let { width, ratio } = this.props;
 
-        let margin = {left: 20, right: 0, top:130, bottom: 250};
+        let margin = {left: 20, right: 20, top:130, bottom: 250};
         let height = 750;
 
         let gridHeight = height - margin.top - margin.bottom;
@@ -118,12 +118,12 @@ class CandleStickStockScaleChart extends React.Component{
                             seriesName={this.props.symbol}
                             data={this.state.data}
                             xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-                            xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 21)]}>
+                            xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 22)]}>
 
                         <Chart id={1} yExtents={d => [d.high, d.low]}>
 
-                            <YAxis axisAt="left" orient="left" ticks={5} {...yGrid} inverted={true} tickStroke="#FFFFFF" />
-                            <XAxis axisAt="bottom" orient="bottom" ticks={5} {...xGrid} inverted={true} tickStroke="#FFFFFF"/>
+                            <YAxis axisAt="left" orient="left" ticks={7} {...yGrid} inverted={true} tickStroke="#FFFFFF" />
+                            <XAxis axisAt="bottom" orient="bottom" ticks={7} {...xGrid} inverted={true} tickStroke="#FFFFFF"/>
 
                             <CandlestickSeries wickStroke={d => d.close > d.open ? "#505667" : "#505667"}
                                 fill={d => d.close > d.open ? "#26ff00" : "#ff1500"}/>

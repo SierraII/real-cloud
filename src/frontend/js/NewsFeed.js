@@ -90,7 +90,14 @@ class NewsFeed extends React.Component{
         }
 
         else{
-            return(<div className="loading-news"><div className="loader"></div></div>);
+
+            return(
+
+                <div className="loading-news">
+                    <div className="loader"></div>
+                </div>
+
+            );
         }
 
 	}
