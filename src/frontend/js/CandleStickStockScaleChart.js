@@ -27,38 +27,61 @@ class CandleStickStockScaleChart extends React.Component{
     }
 
     propTypes: {
-
     	width: React.PropTypes.number.isRequired,
     	ratio: React.PropTypes.number.isRequired,
-        symbol: React.PropTypes.string.isRequired
-
+        symbol: React.PropTypes.string.isRequired,
+        series: React.PropTypes.string.isRequired
     }
 
     componentDidMount(){
 
-        // get the data
-        var data = [];
+        let data = [];
 
-        axios.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" + this.props.symbol + "&interval=1min&apikey=BEDQE0RSQK7E37S6").then(result => {
+        let apiMappings = {
+            "MONTHLY": "Monthly Time Series",
+            "DAILY": "Time Series (Daily)",
+            "INTRADAY": "Time Series (1min)"
+        };
 
-            var monthlySeries = result.data["Monthly Time Series"];
+        let url = "https://www.alphavantage.co/query?function=TIME_SERIES_" + this.props.series + "&symbol=" + this.props.symbol + "&interval=1min&apikey=BEDQE0RSQK7E37S6";
 
-            for(var key in monthlySeries){
+        if(this.props.series === "INTRADAY"){
+            url += "&interval=1min"
+        }
 
-                if(monthlySeries.hasOwnProperty(key)){
+        var numDaysBetween = function(d1, d2){
+          var diff = Math.abs(d1.getTime() - d2.getTime());
+          return diff / (1000 * 60 * 60 * 24);
+        };
 
-                    var value = monthlySeries[key];
-                    var month = {};
+        let today = new Date();
 
-                    month["date"] = new Date(key);
+        axios.get(url).then(result => {
 
-                    month["open"] = parseFloat(value["1. open"]);
-                    month["high"] = parseFloat(value["2. high"]);
-                    month["low"] = parseFloat(value["3. low"]);
-                    month["close"] = parseFloat(value["4. close"]);
-                    month["volume"] = parseFloat(value["5. volume"]);
+            var series = result.data[apiMappings[this.props.series]];
 
-                    data.unshift(month);
+            for(var key in series){
+
+                console.log("getting...");
+
+                if(series.hasOwnProperty(key)){
+
+                    if(numDaysBetween(today, new Date(key)) < 90){
+
+                        let value = series[key];
+                        let month = {};
+
+                        month["date"] = new Date(key);
+
+                        month["open"] = parseFloat(value["1. open"]);
+                        month["high"] = parseFloat(value["2. high"]);
+                        month["low"] = parseFloat(value["3. low"]);
+                        month["close"] = parseFloat(value["4. close"]);
+                        month["volume"] = parseFloat(value["5. volume"]);
+
+                        data.unshift(month);
+
+                    }
 
                 }
 
@@ -72,17 +95,17 @@ class CandleStickStockScaleChart extends React.Component{
 
 	render(){
 
-		var { width, ratio } = this.props;
+		let { width, ratio } = this.props;
 
-        var margin = {left: 20, right: 80, top:130, bottom: 250};
-        var height = 750;
+        let margin = {left: 20, right: 80, top:130, bottom: 250};
+        let height = 750;
 
-        var gridHeight = height - margin.top - margin.bottom;
-        var gridWidth = width - margin.left - margin.right;
+        let gridHeight = height - margin.top - margin.bottom;
+        let gridWidth = width - margin.left - margin.right;
 
-        var showGrid = true;
-        var yGrid = showGrid ? { innerTickSize: -1 * gridWidth, tickStrokeOpacity: 0.2 } : {};
-        var xGrid = showGrid ? { innerTickSize: -1 * gridHeight, tickStrokeOpacity: 0.2 } : {};
+        let showGrid = true;
+        let yGrid = showGrid ? { innerTickSize: -1 * gridWidth, tickStrokeOpacity: 0.2 } : {};
+        let xGrid = showGrid ? { innerTickSize: -1 * gridHeight, tickStrokeOpacity: 0.2 } : {};
 
         if (this.state.data){
 
@@ -90,13 +113,10 @@ class CandleStickStockScaleChart extends React.Component{
 
                 <ChartCanvas ratio={ratio} width={width} height={400}
     					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type="svg"
-    					seriesName="MSFT"
+    					seriesName={this.props.symbol}
     					data={this.state.data}
     					xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-    					xExtents={[new Date(2001, 0, 1), new Date(2017, 6, 2)]}>
-
-                        <Label x={(width - margin.left - margin.right) / 2} y={(height - margin.top - margin.bottom) / 2}
-                        fontSize="40" text={this.props.symbol} fill="#FFFFFF" opacity="0.2"/>
+    					xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 20)]}>
 
     				<Chart id={1} yExtents={d => [d.high, d.low]}>
 
@@ -105,9 +125,14 @@ class CandleStickStockScaleChart extends React.Component{
 
         				<CandlestickSeries wickStroke={d => d.close > d.open ? "#505667" : "#505667"}
 							fill={d => d.close > d.open ? "#26ff00" : "#ff1500"}/>
+
+                        <OHLCTooltip forChart={1} origin={[20, 10]}/>
+
     				</Chart>
 
-                    <OHLCTooltip forChart={1} origin={[20, 350]}/>
+                    <Label x={(width - margin.left - margin.right) / 2} y={(height - margin.top - margin.bottom) / 2}
+                    fontSize={40} text={this.props.symbol} fill="#FFFFFF" opacity={0.2}/>
+
                     <CrossHairCursor stroke="#FFFFFF"/>
 
     			</ChartCanvas>

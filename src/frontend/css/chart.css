@@ -1,7 +1,16 @@
-.chart-container{
-    background-color:#1C1F25;
+body{
+    background:#1C1F25;
 }
 
-body{
-       background: #1C1F25;
+#chart-container{
+    display:inline-block;
+    width:75%;
+}
+
+.react-stockcharts-tooltip{
+    fill:white;
+}
+
+.react-stockcharts-tooltip-label{
+    fill:yellow;
 }
