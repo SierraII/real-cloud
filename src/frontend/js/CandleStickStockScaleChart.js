@@ -46,12 +46,14 @@ class CandleStickStockScaleChart extends React.Component{
         let url = "https://www.alphavantage.co/query?function=TIME_SERIES_" + this.props.series + "&symbol=" + this.props.symbol + "&interval=1min&apikey=BEDQE0RSQK7E37S6";
 
         if(this.props.series === "INTRADAY"){
-            url += "&interval=1min"
+            url += "&interval=1min";
         }
 
         var numDaysBetween = function(d1, d2){
-          var diff = Math.abs(d1.getTime() - d2.getTime());
-          return diff / (1000 * 60 * 60 * 24);
+
+            let diff = Math.abs(d1.getTime() - d2.getTime());
+            return diff / (1000 * 60 * 60 * 24);
+
         };
 
         let today = new Date();
@@ -61,8 +63,6 @@ class CandleStickStockScaleChart extends React.Component{
             var series = result.data[apiMappings[this.props.series]];
 
             for(var key in series){
-
-                console.log("getting...");
 
                 if(series.hasOwnProperty(key)){
 

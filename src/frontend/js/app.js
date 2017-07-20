@@ -1,11 +1,12 @@
 import React from 'react';
 import CandleStickStockScaleChart from './CandleStickStockScaleChart.js';
+import NewsFeed from './NewsFeed.js';
 
 class App extends React.Component{
 
     render(){
 
-        let stockSymbols = ["GOOGL", "TSLA", "MSFT", "AMZN"];
+        let stockSymbols = ["GOOGL", "TSLA", "MSFT", "AMZN", "AAPL"];
         let renderedStockDoms = [];
 
         for(var i = 0; i < stockSymbols.length; i++){
@@ -21,7 +22,12 @@ class App extends React.Component{
         }
 
         return(
-            <div>{renderedStockDoms}</div>
+
+            <div>
+                <div className="chart-parent">{renderedStockDoms}</div>
+                <div className="news-feed-parent"><NewsFeed symbols={stockSymbols}/></div>
+            </div>
+
         );
 
     }
