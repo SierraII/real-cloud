@@ -3,6 +3,9 @@ import CandleStickStockScaleChart from './CandleStickStockScaleChart.js';
 import NewsFeed from './NewsFeed.js';
 import Profile from './Profile.js';
 
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 class App extends React.Component{
 
     render(){

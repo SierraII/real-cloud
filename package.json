@@ -33,6 +33,7 @@
     "react": "^15.6.1",
     "react-chartjs": "^0.8.0",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2",
     "react-stockcharts": "^0.6.1",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"

@@ -17,49 +17,29 @@ class NewsFeed extends React.Component{
 
     componentDidMount(){
 
-        // TODO
-        // create a proxy for getting google news xml feeds
-        // cant be loaded from ajax
-        // simulated load delay
+        console.log(this.props.symbols);
 
-        let data = [];
+        var self = this;
 
-        let url = "";
+        let tmp = [];
 
-        axios.get(url).then(result => {
-            this.setState({data: data});
-        });
+        for(var i = 0; i < this.props.symbols.length; i++){
 
-        var txt, parser, xmlDoc;
-        parser = new DOMParser();
-        xmlDoc = parser.parseFromString("", "text/xml");
+            let symbol = this.props.symbols[i];
 
-        function readTextFile(file){
+            let url = "http://127.0.0.1:5000/news/get-all?symbol=" + symbol;
 
-            var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", file, false);
+            axios.get(url).then(result => {
 
-            rawFile.onreadystatechange = function(){
+                result["symbol"] = symbol;
 
-                if(rawFile.readyState === 4){
+                tmp.push(result);
 
-                    if(rawFile.status === 200 || rawFile.status == 0){
+                self.setState({data: tmp});
 
-                        var allText = rawFile.responseText;
-
-                        xmlDoc = parser.parseFromString(allText, "text/xml");
-
-                    }
-
-                }
-
-            }
-
-            rawFile.send(null);
+            });
 
         }
-
-        readTextFile("./tmp/News.xml");
 
     }
 
@@ -67,24 +47,35 @@ class NewsFeed extends React.Component{
 
         let dom = [];
 
-        for(var i = 0; i < 100; i++){
-
-            dom.push(
-
-                <a href="http://www.google.co.za" target="_blank">
-
-                    <div className="article-container">
-                        <div className="heading"><span className="stock-highlight">TSLA</span> - Model 3 Can Propel Tesla Inc (TSLA) Stock to $400 by 2018</div>
-                        <div className="date">Tue, 18 Jul 2017 13:59:18 GMT</div>
-                    </div>
-
-                </a>
-
-            );
-
-        }
-
         if (this.state.data){
+
+            var data = this.state.data;
+
+            for(var i = 0; i < data.length; i++){
+
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(data[i].data, "text/xml");
+
+                $(xmlDoc).find("item").each(function(){
+
+                    var el = $(this);
+
+                    dom.push(
+
+                        <a href={el.find("link").text()} target="_blank">
+
+                            <div className="article-container">
+                                <div className="heading"><span className="stock-highlight">{data[i].symbol}</span> - {el.find("title").text()}</div>
+                                <div className="date">{el.find("pubDate").text()}</div>
+                            </div>
+
+                        </a>
+
+                    );
+
+                });
+
+            }
 
             return(
 

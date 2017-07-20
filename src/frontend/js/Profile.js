@@ -24,8 +24,6 @@ class NewsFeed extends React.Component{
 
     startMarketOpenTimer(){
 
-        console.log("timer started");
-
         var self = this;
 
         var end = new Date();
@@ -34,8 +32,6 @@ class NewsFeed extends React.Component{
         end.setMinutes(0);
         end.setSeconds(0);
         end.setMilliseconds(0);
-
-        console.log(end);
 
         var _second = 1000;
         var _minute = _second * 60;
