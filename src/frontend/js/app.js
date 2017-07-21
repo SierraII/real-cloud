@@ -1,10 +1,9 @@
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import React from 'react';
-import CandleStickStockScaleChart from './CandleStickStockScaleChart.js';
+
+import StockChart from './StockChart.js';
 import NewsFeed from './NewsFeed.js';
 import Profile from './Profile.js';
-
-
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends React.Component{
 
@@ -18,7 +17,7 @@ class App extends React.Component{
             renderedStockDoms.push(
 
                 <div key={stockSymbols[i]} id="chart-container">
-                    <CandleStickStockScaleChart symbol={stockSymbols[i]} series="DAILY"/>
+                    <StockChart symbol={stockSymbols[i]} series="INTRADAY"/>
                 </div>
 
             );

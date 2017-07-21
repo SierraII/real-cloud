@@ -14,7 +14,7 @@ var { CandlestickSeries } = series;
 var { XAxis, YAxis } = axes;
 var { fitWidth } = helper;
 
-class CandleStickStockScaleChart extends React.Component{
+class StockChart extends React.Component{
 
     constructor(props){
 
@@ -159,6 +159,6 @@ class CandleStickStockScaleChart extends React.Component{
 
 }
 
-CandleStickStockScaleChart = fitWidth(CandleStickStockScaleChart);
+StockChart = fitWidth(StockChart);
 
-export default CandleStickStockScaleChart;
+export default StockChart;
