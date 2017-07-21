@@ -9,7 +9,7 @@ app = Flask(__name__)
 cors = CORS(app)
 cache = SimpleCache()
 
-
+# FLASK_APP=core.py FLASK_DEBUG=1 python -m flask run --with-threads
 @app.route('/news/get-all', methods=['GET'])
 def getNews():
     symbol = request.args.get('symbol')
