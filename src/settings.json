@@ -1,0 +1,20 @@
+{
+
+    "stockapi":{
+
+        "address": "https://www.alphavantage.co/query?",
+        "apikey": "BEDQE0RSQK7E37S6",
+
+        "apiMappings": {
+            "MONTHLY": "Monthly Time Series",
+            "DAILY": "Time Series (Daily)",
+            "INTRADAY": "Time Series (1min)"
+        }
+
+    },
+
+    "newsapi":{
+        "address": "https://www.google.co.uk/finance/company_news?output=rss&q=NASDAQ:"
+    }
+
+}

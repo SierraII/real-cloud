@@ -25,7 +25,7 @@ class NewsFeed extends React.Component{
 
             let symbol = this.props.symbols[i];
 
-            let url = "http://127.0.0.1:5000/news/get-all?symbol=" + symbol;
+            let url = "http://127.0.0.1:5000/news/get?symbol=" + symbol;
 
             axios.get(url).then(result => {
 

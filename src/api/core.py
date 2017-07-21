@@ -10,13 +10,14 @@ cors = CORS(app)
 cache = SimpleCache()
 
 # FLASK_APP=core.py FLASK_DEBUG=1 python -m flask run --with-threads
-@app.route('/news/get-all', methods=['GET'])
-def getNews():
+@app.route('/news/get', methods=['GET'])
+def get_news():
+
     symbol = request.args.get('symbol')
     news = cache.get(symbol)
 
     if news is None:
-        news = requests.get('https://www.google.co.uk/finance/company_news?q=NASDAQ:' + symbol + '&output=rss').content
+        news = requests.get('https://www.google.co.uk/finance/company_news?output=rss&q=NASDAQ:' + symbol).content
         cache.set(symbol, news, timeout= 5*60)
 
     return news
