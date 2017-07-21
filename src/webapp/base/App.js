@@ -16,8 +16,12 @@ class App extends React.Component{
 
             renderedStockDoms.push(
 
-                <div key={stockSymbols[i]} id="chart-container">
-                    <StockChart symbol={stockSymbols[i]} series="INTRADAY"/>
+                <div className="chart-line-container">
+
+                    <div key={stockSymbols[i]} id="chart-container">
+                        <StockChart symbol={stockSymbols[i]} series="INTRADAY"/>
+                    </div>
+
                 </div>
 
             );
@@ -28,11 +32,18 @@ class App extends React.Component{
 
             <div>
 
-                <div className="chart-parent">{renderedStockDoms}</div>
+                <div className="content-parent">
+                    {renderedStockDoms}
+                </div>
 
                 <div className="side-container">
+
                     <Profile/>
+
+                    <span className="faded-line"></span>
+
                     <NewsFeed symbols={stockSymbols}/>
+
                 </div>
 
             </div>

@@ -3,6 +3,10 @@ body{
     margin:0;
 }
 
+.menu{
+    height:75px;
+}
+
 .loading{
     margin-left:50%;
     height:400px;
@@ -30,10 +34,9 @@ body{
 }
 
 .profile-container{
-    margin: 2px;
-    padding:15px;
+    margin:2px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255 ,0.2);
+    height:75px;
 }
 
 .btn{
@@ -56,9 +59,10 @@ body{
 
 .article-container{
     padding:15px;
-    border: 1px solid rgba(255, 255, 255 ,0.2);
+    /*border: 1px solid rgba(255, 255, 255 ,0.2);*/
     margin: 3px;
     cursor: pointer;
+    transition:all .3s;
 }
 
 .news-container a{
@@ -68,17 +72,49 @@ body{
 
 .article-container:hover{
     background-color: rgba(255, 255, 255, 0.2);
-    transition:all .3s;
+
+}
+
+.chart-line-container{
+    margin: 40px 0 0 0;
+}
+
+.faded-line{
+    display:block;
+    border:none;
+    color:white;
+    height:1px;
+    background:black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 147%, 350, from(rgba(255,255,255, 0.2)), to(rgba(28, 31, 37, 0.1)))
+}
+
+.faded-line-darker{
+    display:block;
+    border:none;
+    color:white;
+    height:1px;
+    background:black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 147%, 350, from(rgba(255,255,255, 0.2)), to(rgba(28, 31, 37, 1)))
+}
+
+.faded-line-control{
+    display: inline-block;
+    width: 70%;
+    margin-left: 5%;
+    border:none;
+    color:white;
+    height:1px;
+    background:black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 300, from(rgba(255,255,255, 0.2)), to(rgba(28, 31, 37, 1)))
 }
 
 #chart-container{
     clear:both;
-    margin:0 0 55px 0;
+    height:440px;
 }
 
-.profile-img-circle{
-    border-radius: 50%;
-    width:75px;
+.profile-card{
+
 }
 
 .profile-name{
@@ -86,6 +122,7 @@ body{
     font-size:12px;
 }
 .controls{
+    margin:10px 27px;
     float:right;
     font-size:12px;
 }
@@ -108,15 +145,16 @@ body{
     display:inline-block;
     position:fixed;
     color:white;
-    padding:5px 5px 0 0;
+    padding:5px 5px 0 15px;
+    background-size: 2px 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-image: linear-gradient(to bottom, rgba(28, 31, 37, 1) 0%, rgba(255,255,255, 0.2) 50%, rgba(28, 31, 37, 1) 100%)
 }
 
-.chart-parent{
-    height:calc(99vh - 15px);
-    overflow-y:scroll;
+.content-parent{
     display:inline-block;
     width:75%;
-    padding: 15px 15px 0 0;
 }
 
 .react-stockcharts-tooltip{

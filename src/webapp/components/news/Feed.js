@@ -60,14 +60,20 @@ class NewsFeed extends React.Component{
 
                     dom.push(
 
-                        <a href={el.find("link").text()} target="_blank">
+                        <div className="block-container">
 
-                            <div className="article-container">
-                                <div className="heading"><span className="highlight">{data[i].symbol}</span> - {el.find("title").text()}</div>
-                                <div className="date">{el.find("pubDate").text()}</div>
-                            </div>
+                            <a href={el.find("link").text()} target="_blank">
 
-                        </a>
+                                <div className="article-container">
+                                    <div className="heading"><span className="highlight">{data[i].symbol}</span> - {el.find("title").text()}</div>
+                                    <div className="date">{el.find("pubDate").text()}</div>
+                                </div>
+
+                            </a>
+
+                            <span className="faded-line-darker"></span>
+
+                        </div>
 
                     );
 
