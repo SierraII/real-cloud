@@ -36,9 +36,26 @@ class StockChart extends React.Component{
 
     componentDidMount(){
         this._getStockPrice("INTRADAY");
+        this._startPriceTimer();
+    }
+
+    _startPriceTimer(){
+
+        var self = this;
+
+        var timer;
+
+        function showRemaining(){
+            self._getStockPrice(self.props.series);
+        }
+
+        timer = setInterval(showRemaining, 1000 * 30);
+
     }
 
     _getStockPrice(series){
+
+        console.log("getting rpice...");
 
         let data = [];
         let url = "http://127.0.0.1:5000/stocks/get?symbol=" + this.props.symbol + "&interval=" + series;
