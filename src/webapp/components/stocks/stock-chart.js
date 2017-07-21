@@ -34,18 +34,7 @@ class StockChart extends React.Component{
     componentDidMount(){
 
         let data = [];
-
-        let apiMappings = {
-            "MONTHLY": "Monthly Time Series",
-            "DAILY": "Time Series (Daily)",
-            "INTRADAY": "Time Series (1min)"
-        };
-
-        let url = "https://www.alphavantage.co/query?function=TIME_SERIES_" + this.props.series + "&symbol=" + this.props.symbol + "&interval=1min&apikey=BEDQE0RSQK7E37S6";
-
-        if(this.props.series === "INTRADAY"){
-            url += "&interval=1min";
-        }
+        let url = "http://127.0.0.1:5000/stocks/get?symbol=" + this.props.symbol + "&interval=" + this.props.series;
 
         var numDaysBetween = function(d1, d2){
 
@@ -58,7 +47,7 @@ class StockChart extends React.Component{
 
         axios.get(url).then(result => {
 
-            var series = result.data[apiMappings[this.props.series]];
+            var series = result.data;
 
             for(var key in series){
 

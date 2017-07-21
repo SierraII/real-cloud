@@ -2,3 +2,4 @@ node_modules/
 build/
 npm-debug.log
 __init__.py
+*.pyc

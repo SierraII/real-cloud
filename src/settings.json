@@ -1,19 +1,33 @@
 {
 
-    "stockapi":{
+    "stocks-api":{
 
         "address": "https://www.alphavantage.co/query?",
-        "apikey": "BEDQE0RSQK7E37S6",
+        "api-key": "BEDQE0RSQK7E37S6",
 
-        "apiMappings": {
-            "MONTHLY": "Monthly Time Series",
-            "DAILY": "Time Series (Daily)",
-            "INTRADAY": "Time Series (1min)"
-        }
+        "api-mappings": [
+
+            {
+                "id": "MONTHLY",
+                "map": "Monthly Time Series",
+                "cache_time": 60
+            },
+            {
+                "id": "DAILY",
+                "map": "Time Series (Daily)",
+                "cache_time": 60
+            },
+            {
+                "id": "INTRADAY",
+                "map": "Time Series (1min)",
+                "cache_time": 1
+            }
+
+        ]
 
     },
 
-    "newsapi":{
+    "news-api":{
         "address": "https://www.google.co.uk/finance/company_news?output=rss&q=NASDAQ:"
     }
 

@@ -1,5 +1,5 @@
 import json
 
-with open('../settings.json') as data_file:
-    data = json.load(data_file)
-    print data
+def get_settings():
+    with open('./src/settings.json') as data_file:
+        return json.load(data_file)
