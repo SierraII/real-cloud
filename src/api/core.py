@@ -1,15 +1,16 @@
 import requests
+import os
+
+from utils import lib
 
 from werkzeug.contrib.cache import SimpleCache
 from flask import Flask, request
 from flask_cors import CORS
 
-
 app = Flask(__name__)
 cors = CORS(app)
 cache = SimpleCache()
 
-# FLASK_APP=core.py FLASK_DEBUG=1 python -m flask run --with-threads
 @app.route('/news/get', methods=['GET'])
 def get_news():
 
@@ -24,4 +25,7 @@ def get_news():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+
+    watch_files = lib.get_directory_files(['./src/api/']);
+
+    app.run(debug=True, threaded=True, extra_files=watch_files)
