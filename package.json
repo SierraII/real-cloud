@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --hot --output-public-path=/build/"
+    "webapp": "webpack-dev-server --progress --hot --output-public-path=/build/",
+    "api": "python ./src/api/core.py"
   },
   "repository": {
     "type": "git",
