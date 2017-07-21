@@ -45,6 +45,10 @@ body{
     font-size:12px;
 }
 
+.btn.active{
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
 .btn:hover{
     background-color: rgba(255, 255, 255, 0.2);
     transition:all .3s;
@@ -83,6 +87,7 @@ body{
 }
 .controls{
     float:right;
+    font-size:12px;
 }
 
 .news-container{
@@ -95,7 +100,7 @@ body{
     padding:8px 0;
 }
 
-.stock-highlight{
+.highlight{
     color:yellow;
 }
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
+import { format } from "d3-format";
+import { timeFormat } from "d3-time-format";
+
 import { ChartCanvas, Chart, series, scale, coordinates, annotation, tooltip, axes, indicator, helper } from "react-stockcharts";
 
 var { CrossHairCursor, MouseCoordinateX, MouseCoordinateY } = coordinates;
@@ -19,7 +22,8 @@ class StockChart extends React.Component{
         super(props);
 
         this.state = {
-            data: null
+            data: null,
+            series: "INTRADAY"
         };
 
     }
@@ -28,13 +32,18 @@ class StockChart extends React.Component{
     	width: React.PropTypes.number.isRequired,
     	ratio: React.PropTypes.number.isRequired,
         symbol: React.PropTypes.string.isRequired,
-        series: React.PropTypes.string.isRequired
     }
 
     componentDidMount(){
+        this._getStockPrice("INTRADAY");
+    }
+
+    _getStockPrice(series){
 
         let data = [];
-        let url = "http://127.0.0.1:5000/stocks/get?symbol=" + this.props.symbol + "&interval=" + this.props.series;
+        let url = "http://127.0.0.1:5000/stocks/get?symbol=" + this.props.symbol + "&interval=" + series;
+
+        this.setState({loading: "loading..."});
 
         var numDaysBetween = function(d1, d2){
 
@@ -53,7 +62,7 @@ class StockChart extends React.Component{
 
                 if(series.hasOwnProperty(key)){
 
-                    if(numDaysBetween(today, new Date(key)) < 90){
+                    if(numDaysBetween(today, new Date(key)) < 180){
 
                         let value = series[key];
                         let month = {};
@@ -74,17 +83,23 @@ class StockChart extends React.Component{
 
             }
 
-            this.setState({data: data});
+            this.loading = "";
+
+            this.setState({data: data, series: series, loading: ""});
 
         });
 
+    }
+
+    _changeSeries(series){
+        this._getStockPrice(series);
     }
 
 	render(){
 
 		let { width, ratio } = this.props;
 
-        let margin = {left: 20, right: 20, top:130, bottom: 250};
+        let margin = {left: 20, right: 60, top:130, bottom: 250};
         let height = 750;
 
         let gridHeight = height - margin.top - margin.bottom;
@@ -98,14 +113,14 @@ class StockChart extends React.Component{
 
             return(
 
-                <div>
+                <div id={this.props.symbol}>
 
                     <ChartCanvas ratio={ratio} width={width} height={400}
-                            margin={{ left: 50, right: 0, top: 10, bottom: 30 }} type="svg"
+                            margin={{ left: 50, right: 60, top: 10, bottom: 30 }} type="svg"
                             seriesName={this.props.symbol}
                             data={this.state.data}
                             xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-                            xExtents={[new Date(2001, 6, 20), new Date(2017, 6, 22)]}>
+                            xExtents={[this.state.data[0].date, this.state.data[this.state.data.length - 1].date]}>
 
                         <Chart id={1} yExtents={d => [d.high, d.low]}>
 
@@ -117,6 +132,16 @@ class StockChart extends React.Component{
 
                             <OHLCTooltip forChart={1} origin={[20, 10]}/>
 
+                            <MouseCoordinateY
+                                at="right"
+                                orient="right"
+                                displayFormat={format(".2f")} />
+
+                            <MouseCoordinateX
+                                at="bottom"
+                                orient="bottom"
+                                displayFormat={timeFormat("%d/%m %H:%M")} />
+
                         </Chart>
 
                         <Label x={(width - margin.left - margin.right) / 2} y={(height - margin.top - margin.bottom) / 2}
@@ -127,9 +152,10 @@ class StockChart extends React.Component{
                     </ChartCanvas>
 
                     <div className="controls">
-                        <a className="btn">Daily</a>
-                        <a className="btn">Year</a>
-                        <a className="btn">Tracker</a>
+                        <span className="highlight font-small">{this.state.loading} </span>
+                        <a className="btn active" onClick={this._changeSeries.bind(this, "INTRADAY")}>Intraday</a>
+                        <a className="btn" onClick={this._changeSeries.bind(this, "DAILY")}>Daily</a>
+                        <a className="btn" onClick={this._changeSeries.bind(this, "MONTHLY")}>Monthly</a>
                     </div>
 
                 </div>

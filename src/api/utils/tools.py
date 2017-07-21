@@ -1,6 +1,5 @@
 import os
 
-
 def get_directory_files(directories):
 
     files = directories[:]

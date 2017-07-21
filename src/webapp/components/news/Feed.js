@@ -63,7 +63,7 @@ class NewsFeed extends React.Component{
                         <a href={el.find("link").text()} target="_blank">
 
                             <div className="article-container">
-                                <div className="heading"><span className="stock-highlight">{data[i].symbol}</span> - {el.find("title").text()}</div>
+                                <div className="heading"><span className="highlight">{data[i].symbol}</span> - {el.find("title").text()}</div>
                                 <div className="date">{el.find("pubDate").text()}</div>
                             </div>
 
