@@ -92,7 +92,25 @@ class StockChart extends React.Component{
     }
 
     _changeSeries(series){
+
         this._getStockPrice(series);
+
+        var controls = $("div#" + this.props.symbol + ">div.controls");
+
+        console.log(controls);
+
+        controls.children("a").each(function(){
+
+            console.log(this);
+
+            $(this).removeClass("active");
+
+            if($(this).data("series") === series){
+                $(this).addClass("active");
+            }
+
+        });
+
     }
 
 	render(){
@@ -153,9 +171,9 @@ class StockChart extends React.Component{
 
                     <div className="controls">
                         <span className="highlight font-small">{this.state.loading} </span>
-                        <a className="btn active" onClick={this._changeSeries.bind(this, "INTRADAY")}>Intraday</a>
-                        <a className="btn" onClick={this._changeSeries.bind(this, "DAILY")}>Daily</a>
-                        <a className="btn" onClick={this._changeSeries.bind(this, "MONTHLY")}>Monthly</a>
+                        <a className="btn active" data-series="INTRADAY" onClick={this._changeSeries.bind(this, "INTRADAY")}>Intraday</a>
+                        <a className="btn" data-series="DAILY" onClick={this._changeSeries.bind(this, "DAILY")}>Daily</a>
+                        <a className="btn" data-series="MONTHLY" onClick={this._changeSeries.bind(this, "MONTHLY")}>Monthly</a>
                     </div>
 
                 </div>
