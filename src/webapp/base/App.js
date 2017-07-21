@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import React from 'react';
 
-import StockChart from './StockChart.js';
-import NewsFeed from './NewsFeed.js';
-import Profile from './Profile.js';
+import StockChart from '../components/StockChart.js';
+import NewsFeed from '../components/NewsFeed.js';
+import Profile from '../components/Profile.js';
 
 class App extends React.Component{
 

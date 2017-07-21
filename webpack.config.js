@@ -2,7 +2,7 @@ const path = require('path');
 
 var config = {
 
-   entry: './src/frontend/js/Core.js',
+   entry: './src/webapp/base/Core.js',
 
    output: {
         path: path.resolve(__dirname, 'build'),
