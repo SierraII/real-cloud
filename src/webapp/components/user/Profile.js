@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class NewsFeed extends React.Component{
+class Profile extends React.Component{
 
     constructor(props){
 
@@ -14,13 +14,23 @@ class NewsFeed extends React.Component{
 
     }
 
-    componentWillMount(){
-
-        this.startMarketOpenTimer();
-
+    componentWillUnmount(){
+        this._clearMarketOpenTimer();
     }
 
-    startMarketOpenTimer(){
+    componentWillMount(){
+        this._startMarketOpenTimer();
+    }
+
+    _clearMarketOpenTimer(){
+
+        var self = this;
+
+        clearInterval(self.timer);
+        
+    }
+
+    _startMarketOpenTimer(){
 
         var self = this;
 
@@ -35,7 +45,6 @@ class NewsFeed extends React.Component{
         var _minute = _second * 60;
         var _hour = _minute * 60;
         var _day = _hour * 24;
-        var timer;
 
         function showRemaining(){
 
@@ -44,10 +53,11 @@ class NewsFeed extends React.Component{
 
             if (distance < 0){
 
-                clearInterval(timer);
+                clearInterval(self.timer);
                 self.setState({marketOpens: "Market is open."});
 
                 return;
+
             }
 
             var days = Math.floor(distance / _day);
@@ -59,7 +69,7 @@ class NewsFeed extends React.Component{
 
         }
 
-        timer = setInterval(showRemaining, 1000);
+        self.timer = setInterval(showRemaining, 1000);
 
     }
 
@@ -99,4 +109,4 @@ class NewsFeed extends React.Component{
 
 }
 
-export default NewsFeed;
+export default Profile;

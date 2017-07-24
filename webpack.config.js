@@ -12,7 +12,8 @@ var config = {
    devServer: {
       inline: true,
       port: 8080,
-      contentBase: "./src/webapp/"
+      contentBase: "./src/webapp/",
+      historyApiFallback: true,
    },
 
    resolveLoader: {

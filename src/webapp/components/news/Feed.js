@@ -15,8 +15,6 @@ class NewsFeed extends React.Component{
 
     componentDidMount(){
 
-        console.log(this.props.symbols);
-
         var self = this;
 
         let tmp = [];

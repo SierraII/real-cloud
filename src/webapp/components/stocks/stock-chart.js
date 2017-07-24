@@ -34,6 +34,10 @@ class StockChart extends React.Component{
         symbol: React.PropTypes.string.isRequired,
     }
 
+    componentWillUnmount () {
+        clearInterval(this.timer);
+    }
+
     componentDidMount(){
         this._getStockPrice("INTRADAY");
         this._startPriceTimer();
@@ -43,13 +47,11 @@ class StockChart extends React.Component{
 
         var self = this;
 
-        var timer;
-
         function showRemaining(){
             self._getStockPrice(self.props.series);
         }
 
-        timer = setInterval(showRemaining, 1000 * 30);
+        self.timer = setInterval(showRemaining, 1000 * 30);
 
     }
 
