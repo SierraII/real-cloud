@@ -2,11 +2,11 @@ const path = require('path');
 
 var config = {
 
-   entry: './src/webapp/base/core.js',
+   entry: './src/webapp/base/main.js',
 
    output: {
         path: path.resolve(__dirname, './src/webapp/build/'),
-        filename: 'core.bundle.js'
+        filename: 'main.bundle.js'
     },
 
    devServer: {
