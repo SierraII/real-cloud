@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webapp": "webpack-dev-server --progress --hot --output-public-path=/build/",
+    "build": "webpack",
     "api": "python ./src/api/core.py"
   },
   "repository": {

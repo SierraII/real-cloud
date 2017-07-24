@@ -16,7 +16,7 @@ class App extends React.Component{
 
             renderedStockDoms.push(
 
-                <div className="chart-line-container">
+                <div key={stockSymbols[i]} className="chart-line-container">
 
                     <div key={stockSymbols[i]} id="chart-container">
                         <StockChart symbol={stockSymbols[i]} series="INTRADAY"/>

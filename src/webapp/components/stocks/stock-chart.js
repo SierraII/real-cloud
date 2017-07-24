@@ -55,8 +55,6 @@ class StockChart extends React.Component{
 
     _getStockPrice(series){
 
-        console.log("getting rpice...");
-
         let data = [];
         let url = "http://127.0.0.1:5000/stocks/get?symbol=" + this.props.symbol + "&interval=" + series;
 

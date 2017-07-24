@@ -5,13 +5,14 @@ var config = {
    entry: './src/webapp/base/core.js',
 
    output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, './src/webapp/build/'),
         filename: 'core.bundle.js'
     },
 
    devServer: {
       inline: true,
-      port: 8080
+      port: 8080,
+      contentBase: "./src/webapp/"
    },
 
    resolveLoader: {
