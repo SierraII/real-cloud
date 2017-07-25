@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import React from 'react';
 
 import StockChart from '../components/stocks/stock-chart.js';
+import StockChanges from '../components/stocks/stock-changes.js';
 import NewsFeed from '../components/news/feed.js';
 import Profile from '../components/user/profile.js';
 
@@ -38,7 +39,7 @@ class App extends React.Component{
 
                 <div className="side-container">
 
-                    <Profile/>
+                    <StockChanges/>
 
                     <span className="faded-line"></span>
 

@@ -3,8 +3,69 @@ body{
     margin:0;
 }
 
-.menu{
-    height:75px;
+.menu-bar{
+    height:35px;
+    padding:15px;
+    margin:0 0 15px 0;
+}
+
+.menu-link{
+    margin: 0 2px;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    background-color: rgba(255,255,255, 0.1);
+    height: 5px;
+    display: inline-table;
+}
+
+.stock-changes-container{
+    height:35vh;
+    overflow-y:scroll;
+    font-size: 12px;
+}
+
+.stock-right-side{
+    display: inline-block;
+    float: right;
+}
+
+.stock-container{
+    display:inline-block;
+    margin: 3px 0 0 0;
+}
+
+.change-container:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+.change-container{
+    color:white;
+    clear: both;
+    padding: 15px;
+    margin: 3px;
+}
+
+.price{
+    display:inline-block;
+    margin:0 15px;
+}
+
+.difference.positive{
+    background-color: #4CDA64;
+    border: 1px solid #4CDA64;
+}
+
+.difference.negative{
+    background-color: #FF3B2F;
+    border: 1px solid #FF3B2F;
+}
+
+.difference{
+    padding: 2px;
+    display: inline-block;
+    border-radius: 4px;
 }
 
 .loading{
@@ -84,8 +145,15 @@ body{
     border:none;
     color:white;
     height:1px;
-    background:black;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 147%, 350, from(rgba(255,255,255, 0.2)), to(rgba(28, 31, 37, 0.1)))
+}
+
+.faded-line-long{
+    display: block;
+    border: none;
+    color: white;
+    height: 1px;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 147%, 825, from(rgba(255,255,255, 0.2)), to(rgba(28, 31, 37, 0.1)));
 }
 
 .faded-line-darker{
@@ -93,7 +161,6 @@ body{
     border:none;
     color:white;
     height:1px;
-    background:black;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 147%, 350, from(rgba(255,255,255, 0.2)), to(rgba(28, 31, 37, 1)))
 }
 
@@ -129,7 +196,7 @@ body{
 
 .news-container{
     overflow-y: scroll;
-    height: calc(99vh - 85px);
+    height: 65vh;
     font-size:12px;
 }
 
@@ -145,7 +212,7 @@ body{
     display:inline-block;
     position:fixed;
     color:white;
-    padding:5px 5px 0 15px;
+    padding:5px 5px 0 5px;
     background-size: 2px 100%;
     background-repeat: no-repeat;
     background-position: 0 0;
